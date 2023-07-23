@@ -4,6 +4,18 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'app/pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    codeCoverageToolOption: 'Cobertura'
+    codeCoverageRestoreOriginalPomXml: true
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
 - master
 
 variables:
